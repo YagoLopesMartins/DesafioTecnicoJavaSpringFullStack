@@ -11,6 +11,7 @@ import com.desafiotecnico.matera.account.repository.AccountRepository;
 import com.desafiotecnico.matera.account.repository.TransactionRepository;
 import com.desafiotecnico.matera.shared.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+
     private final TransactionRepository transactionRepository;
 
     @Transactional
@@ -39,7 +41,7 @@ public class AccountService {
 
     @Transactional
     public void applyTransactions(String accountId, TransactionBatchRequest batch) {
-        Account account = accountRepository.findById(accountId)
+        Account account = accountRepository.findByIdForUpdate(accountId)
                 .orElseThrow(() -> new NotFoundException("Conta não encontrada"));
 
         for (TransactionRequest tr : batch.transactions()) {
@@ -60,6 +62,7 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+
     @Transactional(readOnly = true)
     public BalanceResponse getBalance(String accountId) {
         Account account = accountRepository.findById(accountId)
@@ -70,15 +73,7 @@ public class AccountService {
 
     @Transactional
     public void applyTransactionsWithRetry(String accountId, TransactionBatchRequest batch) {
-        int attempts = 0;
-        while (true) {
-            try {
-                doApplyTransactions(accountId, batch);
-                return;
-            } catch (ObjectOptimisticLockingFailureException ex) {
-                if (++attempts >= 3) throw ex;
-            }
-        }
+        applyTransactions(accountId, batch);
     }
 
     @Transactional

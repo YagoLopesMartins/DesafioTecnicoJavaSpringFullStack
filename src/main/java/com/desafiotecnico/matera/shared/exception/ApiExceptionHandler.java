@@ -20,7 +20,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(InsufficientBalanceException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
     public ApiErrorResponse handleInsufficient(InsufficientBalanceException ex) {
         return new ApiErrorResponse("INSUFFICIENT_BALANCE", ex.getMessage());
     }

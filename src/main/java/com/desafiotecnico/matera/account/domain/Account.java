@@ -51,13 +51,21 @@ public class Account {
     }
 
     public void credit(BigDecimal amount) {
-        balance = balance.add(amount);
+        validateAmount(amount);
+        this.balance = this.balance.add(amount);
     }
 
     public void debit(BigDecimal amount) {
-        if (balance.compareTo(amount) < 0) {
+        validateAmount(amount);
+        if (this.balance.compareTo(amount) < 0) {
             throw new InsufficientBalanceException("Saldo insuficiente.");
         }
-        balance = balance.subtract(amount);
+        this.balance = this.balance.subtract(amount);
+    }
+
+    private void validateAmount(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Valor deve ser maior que zero.");
+        }
     }
 }

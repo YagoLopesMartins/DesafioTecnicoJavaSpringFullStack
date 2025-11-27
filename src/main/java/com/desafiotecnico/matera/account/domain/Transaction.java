@@ -18,6 +18,7 @@ public class Transaction {
     private Long id;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @Enumerated(EnumType.STRING)
@@ -31,7 +32,9 @@ public class Transaction {
     private Instant createdAt;
 
     @PrePersist
-    void prePersist() {
-        createdAt = Instant.now();
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = Instant.now();
+        }
     }
 }

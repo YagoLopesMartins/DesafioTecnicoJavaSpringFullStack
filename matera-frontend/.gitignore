@@ -1,0 +1,87 @@
+# ───────────────────────────────
+#  Node / Core
+# ───────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.pnp
+.pnp.js
+
+# ───────────────────────────────
+#  Next.js build output
+# ───────────────────────────────
+.next/
+out/
+dist/
+
+# ───────────────────────────────
+#  Env files
+# ───────────────────────────────
+.env
+.env*.local
+
+# ───────────────────────────────
+#  Logs
+# ───────────────────────────────
+logs
+*.log
+*.csv
+*.tsv
+*.pid
+*.seed
+*.pid.lock
+
+# ───────────────────────────────
+#  OS / System files
+# ───────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ───────────────────────────────
+#  Editor / IDE configs
+# ───────────────────────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.idea/
+*.iml
+
+# ───────────────────────────────
+#  Test / Coverage
+# ───────────────────────────────
+coverage/
+.nyc_output/
+
+# ───────────────────────────────
+#  TypeScript
+# ───────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ───────────────────────────────
+#  Runtime
+# ───────────────────────────────
+*.local
+
+# ───────────────────────────────
+#  Vercel
+# ───────────────────────────────
+.vercel/
+
+# ───────────────────────────────
+#  Storybook (opcional)
+# ───────────────────────────────
+storybook-static/
+
+# ───────────────────────────────
+#  Misc
+# ───────────────────────────────
+*.swp
+*.swo
+*.zip
